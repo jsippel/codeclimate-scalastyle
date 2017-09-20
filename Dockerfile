@@ -1,16 +1,21 @@
 FROM java
 
+LABEL maintainer "Jeff Sippel <jsippel@acorns.com>"
+
 RUN apt-get update
 RUN apt-get install -y ruby ruby-nokogiri
 
-RUN adduser --uid 9000 --disabled-password --quiet --gecos "" app
+RUN adduser -u 9000 --disabled-password --quiet --gecos "" app
 USER app
 
-WORKDIR /home/app
+WORKDIR /usr/src/app
 
-COPY scalastyle_config.xml /home/app/
-COPY scalastyle_2.11-0.6.0-batch.jar /home/app/
+COPY scalastyle_config.xml /usr/src/app/
+COPY scalastyle_2.11-0.6.0-batch.jar /usr/src/app/
 
-COPY . /home/app
+COPY . /usr/src/app
 
-CMD ["/home/app/bin/scalastyle"]
+VOLUME /code
+WORKDIR /code
+
+CMD ["/usr/src/app/bin/scalastyle"]

@@ -16,7 +16,7 @@ module CC
         Dir.chdir(@directory) do
           next unless results
           results.xpath('//file').each do |file|
-            path = file['name'].sub("/home/app/", "")
+            path = file['name'].sub("/code/", "")
             file.xpath('//error').each do |lint|
               issue = {
                 type: "issue",
@@ -57,15 +57,15 @@ module CC
       end
 
       def scalastyle_jar
-        '/home/app/scalastyle_2.11-0.6.0-batch.jar'
+        '/usr/src/app/scalastyle_2.11-0.6.0-batch.jar'
       end
 
       def scalastyle_config
-        @engine_config['config'] || '/home/app/scalastyle_config.xml'
+        @engine_config['config'] || '/usr/src/app/scalastyle_config.xml'
       end
 
       def results_xml_file_path
-        "/home/app/results.xml"
+        "/tmp/results.xml"
       end
 
       def exec_scalastyle_with_options

@@ -1,14 +1,18 @@
 #!/usr/bin/env ruby
-$LOAD_PATH.unshift(File.expand_path(File.join(File.dirname(__FILE__), "../lib")))
+# frozen_string_literal: true
+
+$:.unshift(
+  File.expand_path(File.join(File.dirname(__FILE__), "../lib")))
 
 require 'cc/engine/scalastyle'
 
-if File.exists?("/config.json")
-  engine_config = JSON.parse(File.read("/config.json"))
-else
-  engine_config = "{}"
-end
+engine_config= 
+  if File.exists?("/config.json")
+    JSON.parse(File.read("/config.json"))
+  else
+    {}
+  end
 
 CC::Engine::ScalaStyle.new(
-  directory: "/code", engine_config: engine_config, io: STDOUT
+  directory: "/code", io: STDOUT, engine_config: engine_config
 ).run
