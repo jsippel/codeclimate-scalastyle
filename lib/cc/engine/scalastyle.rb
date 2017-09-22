@@ -12,7 +12,7 @@ module CC
 
       def run
         exec_scalastyle_with_options
-        
+
         Dir.chdir(@directory) do
           next unless results
           results.xpath('//file').each do |file|
@@ -57,7 +57,7 @@ module CC
       end
 
       def scalastyle_jar
-        '/usr/src/app/scalastyle_2.11-0.6.0-batch.jar'
+        '/usr/src/app/scalastyle_2.12-1.0.0-batch.jar'
       end
 
       def scalastyle_config
@@ -80,7 +80,7 @@ module CC
           @results ||= Nokogiri::XML(File.read(results_xml_file_path))
         end
       end
-      
+
     end
   end
 end

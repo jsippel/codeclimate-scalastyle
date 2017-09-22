@@ -1,21 +1,18 @@
-FROM java
+FROM openjdk:alpine
 
 LABEL maintainer "Jeff Sippel <jsippel@acorns.com>"
 
-RUN apt-get update
-RUN apt-get install -y ruby ruby-nokogiri
+RUN apk update && \
+  apk upgrade && \
+  apk add --no-cache ruby ruby-nokogiri ruby-json
 
-RUN adduser -u 9000 --disabled-password --quiet --gecos "" app
+RUN addgroup -g 9000 -S code && \
+  adduser -S -G code app
 USER app
-
-WORKDIR /usr/src/app
-
-COPY scalastyle_config.xml /usr/src/app/
-COPY scalastyle_2.11-0.6.0-batch.jar /usr/src/app/
 
 COPY . /usr/src/app
 
-VOLUME /code
 WORKDIR /code
+VOLUME /code
 
 CMD ["/usr/src/app/bin/scalastyle"]
