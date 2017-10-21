@@ -1,11 +1,11 @@
-package com.acorns
+package org.codeclimate.scalastyle
 
 import java.io.File
 
 import org.scalastyle._
 
 /**
-  * Executes Scalastyle with given configuration
+  * Computes files and run ScalastyleChecker against them.
   */
 private object ScalaStyleRunner {
   def runCheckstyle(ccConfig: ScalastyleCodeClimateConfiguration): Seq[Message[FileSpec]] = {

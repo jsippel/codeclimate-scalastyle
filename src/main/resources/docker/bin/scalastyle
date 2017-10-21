@@ -1,5 +1,3 @@
-#!/usr/bin/bash
+#!/bin/sh
 
-#exec java -cp /app:/app/engine-core.jar:/app/dependencies/* com.acorns.CodeClimateEngine
-
-exec cat config.json
+exec java -cp ".:/usr/src/app/engine-core.jar:/usr/src/app/dependencies/*" org.codeclimate.scalastyle.CodeClimateEngine

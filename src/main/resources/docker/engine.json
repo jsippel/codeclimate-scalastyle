@@ -2,10 +2,6 @@
   "name": "scalastyle",
   "description": "Run scalastyle checks",
   "maintainer": {
-    "name": "Jeff Sippel",
-    "email": "jsippel@acorns.com"
-  },
-  "maintainer": {
     "name": "Ivan Luzyanin",
     "email": "ivan@acorns.com"
   },

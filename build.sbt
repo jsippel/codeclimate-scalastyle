@@ -1,8 +1,7 @@
-
 name := "codeclimate-scalastyle"
-organization in ThisBuild := "com.acorns"
-version in ThisBuild := "0.1.0-SNAPSHOT"
-scalaVersion in ThisBuild := "2.11.11"
+organization in ThisBuild := "codeclimate"
+version in ThisBuild := "0.1.0"
+scalaVersion in ThisBuild := "2.12.4"
 
 concurrentRestrictions in Global += Tags.limit(Tags.Test, 1)
 parallelExecution in Global := false
