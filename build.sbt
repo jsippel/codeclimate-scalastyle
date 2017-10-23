@@ -55,6 +55,9 @@ dockerfile in docker := {
       ((dependencyClasspath in Runtime) in `engine-core`).value
     }.map(_.data).toSet + ((packageBin in Compile) in `engine-core`).value
 
+    maintainer("Jeff Sippel", "jsippel@acorns.com")
+    maintainer("Ivan Luzyanin", "ivan@acorns.com")
+
     add(dependencies.toSeq, "/usr/src/app/dependencies/")
     add(((packageBin in Compile) in `engine-core`).value, "/usr/src/app/engine-core.jar")
     add(dockerFiles("scalastyle_config.xml"), "/usr/src/app/")
