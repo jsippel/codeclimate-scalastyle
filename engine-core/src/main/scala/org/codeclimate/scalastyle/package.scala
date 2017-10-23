@@ -5,8 +5,8 @@ package object scalastyle {
 
   case class ScalastyleCodeClimateConfiguration(
     config: String,
-    exclude_paths: Seq[String] = Seq.empty,
-    directories: Seq[String] = Seq.empty
+    include_paths: Seq[String] = Seq.empty,
+    exclude_paths: Seq[String] = Seq.empty
   )
 
   sealed trait IssueSchema extends Product with Serializable

@@ -11,6 +11,7 @@ lazy val `engine-core` = project settings (
     "org.scalastyle" %% "scalastyle" % "1.0.0",
     "io.circe" %% "circe-parser" % "0.8.0",
     "io.circe" %% "circe-generic" % "0.8.0",
+    "com.github.scopt" %% "scopt" % "3.7.0",
     "org.scalactic" %% "scalactic" % "3.0.4",
     "org.scalatest" %% "scalatest" % "3.0.4" % "test"
   )

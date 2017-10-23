@@ -3,8 +3,7 @@ engines:
     enabled: true
     config:
       config: src/main/resources/scalastyle_project.xml
-      directories:
-      - engine-core
+      include_paths:
+      - engine-core/src
       exclude_paths:
-      - engine-core/src/test
-      - engine-core/target
+      - .*/test

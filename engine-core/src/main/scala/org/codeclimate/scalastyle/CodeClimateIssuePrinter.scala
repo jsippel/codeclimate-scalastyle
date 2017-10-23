@@ -1,6 +1,6 @@
 package org.codeclimate.scalastyle
 
-import java.io.PrintStream
+import java.io.{File, PrintStream}
 
 import com.typesafe.config.ConfigFactory
 import io.circe.Printer
@@ -10,8 +10,8 @@ import org.scalastyle.{FileSpec, Message, MessageHelper, StyleError}
 
 import scala.collection.JavaConverters._
 
-class CodeClimateIssuePrinter(ps: PrintStream) {
-  private val codePrefix = "/code/"
+class CodeClimateIssuePrinter(workspacePath: String, ps: PrintStream) {
+  private val basePath = new File(workspacePath).toPath
   private val printer = Printer.noSpaces.copy(dropNullKeys = true)
 
   private val messageHelper = new MessageHelper(ConfigFactory.load())
@@ -20,14 +20,16 @@ class CodeClimateIssuePrinter(ps: PrintStream) {
     case se: StyleError[FileSpec] =>
       val errPosition = Position(se.lineNumber.getOrElse(0), se.column.getOrElse(0))
       val filePath = Option(se.fileSpec.name)
-        .filter(_.startsWith(codePrefix))
-        .map(_.substring(codePrefix.length))
+        .map(pathname => basePath.relativize(new File(pathname).toPath))
+        .map(_.toString)
         .getOrElse(se.fileSpec.name)
 
       val location = Location(path = filePath, positions = LinePosition(
         errPosition, errPosition
       ))
-      val msg: String = messageHelper.message(se.key, se.args)
+      val msg: String = se.customMessage.orElse {
+        Some(messageHelper.message(se.key, se.args))
+      }.getOrElse("Error message not provided")
       val issue = Issue(location = location,
         description = String.format(msg, se.args.asJava),
         check_name = Some(se.clazz.getName),
