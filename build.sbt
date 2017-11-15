@@ -34,7 +34,7 @@ imageNames in docker := Seq(
   ImageName(
     namespace = Some("codeclimate"),
     repository = name.value,
-    tag = Some("v" + version.value)
+    tag = Some(version.value)
   )
 )
 

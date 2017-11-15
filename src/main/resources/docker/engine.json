@@ -2,10 +2,10 @@
   "name": "scalastyle",
   "description": "Run scalastyle checks",
   "maintainer": {
-    "name": "Ivan Luzyanin",
-    "email": "ivan@acorns.com"
+    "name": "Jeff Sippel",
+    "email": "jsippel@acorns.com"
   },
   "languages" : ["Scala"],
-  "version": "v0.1.0",
+  "version": "0.1.0",
   "spec_version": "0.0.1"
 }
