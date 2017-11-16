@@ -1,5 +1,6 @@
 FROM openjdk:alpine
 
+LABEL maintainer "Ivan Luzyanin <ivan@acorns.com>"
 LABEL maintainer "Jeff Sippel <jsippel@acorns.com>"
 
 RUN apk update && apk upgrade
