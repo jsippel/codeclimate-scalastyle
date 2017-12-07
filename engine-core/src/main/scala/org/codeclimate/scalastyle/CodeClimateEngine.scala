@@ -5,6 +5,7 @@ import java.nio.charset.Charset
 import java.nio.file.Files
 
 import io.circe.parser.parse
+import org.scalastyle._
 
 import scala.collection.JavaConverters._
 import scala.util.Try
@@ -32,13 +33,12 @@ object CodeClimateEngine extends App {
       }.toEither
 
       val providedConfig = configJson.right.flatMap(parse).right
-        .map(config => config.hcursor.downField("config"))
+        .map(config => config.hcursor)
 
       val includePaths = providedConfig.right.flatMap(_.downField("include_paths").as[Seq[String]]).toOption.getOrElse(Seq.empty)
-      val excludePaths = providedConfig.right.flatMap(_.downField("exclude_paths").as[Seq[String]]).toOption.getOrElse(Seq.empty)
-      val configPath = providedConfig.right.flatMap(_.downField("config").as[String]).toOption.getOrElse(defaultStyleConfigurationPath)
+      val configPath = providedConfig.right.flatMap(_.downField("config").downField("config").as[String]).toOption.getOrElse(defaultStyleConfigurationPath)
 
-      val config = ScalastyleCodeClimateConfiguration(configPath, includePaths, excludePaths)
+      val config = ScalastyleCodeClimateConfiguration(configPath, includePaths, Seq.empty)
 
       val ccPrinter = new CodeClimateIssuePrinter(programArgs.workspace_path, Console.out)
 

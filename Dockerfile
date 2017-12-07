@@ -11,6 +11,7 @@ USER app
 
 COPY codeclimate-scalastyle-assembly-0.1.0.jar /usr/src/app/engine-core.jar
 COPY src/main/resources/docker /usr/src/app
+COPY src/main/resources/docker/engine.json /
 
 WORKDIR /code
 VOLUME /code

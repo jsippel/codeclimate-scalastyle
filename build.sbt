@@ -61,7 +61,7 @@ dockerfile in docker := {
     add(dependencies.toSeq, "/usr/src/app/dependencies/")
     add(((packageBin in Compile) in `engine-core`).value, "/usr/src/app/engine-core.jar")
     add(dockerFiles("scalastyle_config.xml"), "/usr/src/app/")
-    add(dockerFiles("engine.json"), "/usr/src/app/")
+    add(dockerFiles("engine.json"), "/")
     add(dockerFiles("bin/scalastyle"), "/usr/src/app/bin/")
 
     runRaw("apk update && apk upgrade")
